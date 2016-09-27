@@ -1102,8 +1102,8 @@
             <!-- Watched Status -->
             <include>ListWatchedStatus</include>
           </focusedlayout>
-          <!-- By Collection, By Year, By Decade, By Content Rating, By Rating, By First Letter, By Folder -->
-          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Collection) | String.IsEqual(Container.SecondTitle,By Year) | String.IsEqual(Container.SecondTitle,By Decade) | String.IsEqual(Container.SecondTitle,By Content Rating) | String.IsEqual(Container.SecondTitle,By Rating) | String.IsEqual(Container.SecondTitle,By Resolution) | String.IsEqual(Container.SecondTitle,By First Letter) | String.IsEqual(Container.SecondTitle,By Folder)">
+          <!-- By Collection, By Year, By Decade, By Content Rating, By Rating, By First Letter, By Folder, By Camera Make, By Shutter Speed, By ISO, By Lens -->
+          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Collection) | String.IsEqual(Container.SecondTitle,By Year) | String.IsEqual(Container.SecondTitle,By Decade) | String.IsEqual(Container.SecondTitle,By Content Rating) | String.IsEqual(Container.SecondTitle,By Rating) | String.IsEqual(Container.SecondTitle,By Resolution) | String.IsEqual(Container.SecondTitle,By First Letter) | String.IsEqual(Container.SecondTitle,By Folder) | String.IsEqual(Container.SecondTitle,By Camera Make) | String.IsEqual(Container.SecondTitle,By Shutter Speed) | String.IsEqual(Container.SecondTitle,By ISO) | String.IsEqual(Container.SecondTitle,By Lens)">
             <include>ListSeparator</include>
             <!-- Folder Icon -->
             <control type="image">
@@ -1129,7 +1129,7 @@
               <selectedcolor>grey2</selectedcolor>
             </control>
           </itemlayout>
-          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Collection) | String.IsEqual(Container.SecondTitle,By Year) | String.IsEqual(Container.SecondTitle,By Decade) | String.IsEqual(Container.SecondTitle,By Content Rating) | String.IsEqual(Container.SecondTitle,By Rating) | String.IsEqual(Container.SecondTitle,By Resolution) | String.IsEqual(Container.SecondTitle,By First Letter) | String.IsEqual(Container.SecondTitle,By Folder)">
+          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Collection) | String.IsEqual(Container.SecondTitle,By Year) | String.IsEqual(Container.SecondTitle,By Decade) | String.IsEqual(Container.SecondTitle,By Content Rating) | String.IsEqual(Container.SecondTitle,By Rating) | String.IsEqual(Container.SecondTitle,By Resolution) | String.IsEqual(Container.SecondTitle,By First Letter) | String.IsEqual(Container.SecondTitle,By Folder) | String.IsEqual(Container.SecondTitle,By Camera Make) | String.IsEqual(Container.SecondTitle,By Shutter Speed) | String.IsEqual(Container.SecondTitle,By ISO) | String.IsEqual(Container.SecondTitle,By Lens)">
             <include>ListSeparator</include>
             <!-- Highlight -->
             <include>ListHighlight</include>
@@ -1158,7 +1158,7 @@
             </control>
           </focusedlayout>
           <!-- Video Genres -->
-          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + !String.IsEqual(Filter.Type,music)">
+          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + !String.IsEqual(Skin.String(Filter.Type),music)">
             <include>ListSeparator</include>
             <!-- Genre Icon -->
             <control type="image">
@@ -1203,7 +1203,7 @@
               <selectedcolor>grey2</selectedcolor>
             </control>
           </itemlayout>
-          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + !String.IsEqual(Filter.Type,music)">
+          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + !String.IsEqual(Skin.String(Filter.Type),music)">
             <include>ListSeparator</include>
             <!-- Highlight -->
             <include>ListHighlight</include>
@@ -1251,7 +1251,7 @@
             </control>
           </focusedlayout>
 		  <!-- Music Genres -->
-          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + String.IsEqual(Filter.Type,music)">
+          <itemlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + String.IsEqual(Skin.String(Filter.Type),music)">
             <include>ListSeparator</include>
             <!-- Genre Icon -->
             <control type="image">
@@ -1261,7 +1261,6 @@
               <height>105</height>
               <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
               <texture background="true" fallback="views/list/defaultgenre.png">$INFO[ListItem.Label,genres/music/105x105/,.png]</texture>
-              <visible>String.IsEqual(Skin.String(Filter.Type),movies)</visible>
             </control>
             <!-- Title -->
             <control type="label">
@@ -1278,7 +1277,7 @@
               <selectedcolor>grey2</selectedcolor>
             </control>
           </itemlayout>
-          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre)">
+          <focusedlayout height="120" width="1140" condition="String.IsEqual(Container.SecondTitle,By Genre) + String.IsEqual(Skin.String(Filter.Type),music)">
             <include>ListSeparator</include>
             <!-- Highlight -->
             <include>ListHighlight</include>
@@ -1290,7 +1289,6 @@
               <height>105</height>
               <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
               <texture background="true" fallback="views/list/defaultgenre.png">$INFO[ListItem.Label,genres/music/105x105/,.png]</texture>
-              <visible>String.IsEqual(Skin.String(Filter.Type),movies)</visible>
             </control>
             <!-- Display Poster -->
             <control type="label">
@@ -1529,6 +1527,154 @@
               <visible>!IsEmpty(ListItem.Title)</visible>
             </control>
           </focusedlayout>
+          <itemlayout height="120" width="1140" condition="Container.Content(photos)">
+            <include>ListSeparator</include>
+            <control type="image">
+              <posx>15</posx>
+              <posy>8</posy>
+              <width>105</width>
+              <height>105</height>
+              <aspectratio>scale</aspectratio>
+              <texture background="true" fallback="defaultpicture">$INFO[ListItem.Art(smallThumb)]</texture>
+              <colordiffuse>grey2</colordiffuse>
+              <visible>!ListItem.Type(photoAlbum)</visible>
+            </control>
+            <control type="image">
+              <posx>15</posx>
+              <posy>8</posy>
+              <width>105</width>
+              <height>105</height>
+              <aspectratio>scale</aspectratio>
+              <texture background="true" fallback="defaultfolder.png">$INFO[ListItem.Art(smallThumb)]</texture>
+              <colordiffuse>grey2</colordiffuse>
+              <visible>ListItem.Type(photoAlbum)</visible>
+            </control>
+            <!-- Folder Icon -->
+            <control type="image">
+              <posx>85</posx>
+              <posy>13</posy>
+              <width>30</width>
+              <height>30</height>
+              <aspectratio>scale</aspectratio>
+              <texture>icon-photoalbum.png</texture>
+              <visible>ListItem.Type(photoAlbum)</visible>
+              <colordiffuse>grey2</colordiffuse>
+            </control>
+            <!-- Title -->
+            <control type="label">
+              <posx>135</posx>
+              <posy>0</posy>
+              <width>1005</width>
+              <height>70</height>
+              <font>font30</font>
+              <textcolor>grey2</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+              <animation effect="slide" start="0,0" end="0,25" time="0" condition="IsEmpty(ListItem.Date)">Conditional</animation>
+            </control>
+            <!-- Date -->
+            <control type="label">
+              <posx>135</posx>
+              <posy>55</posy>
+              <width>708</width>
+              <height>60</height>
+              <font>font15</font>
+              <textcolor>grey3</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Date]</label>
+            </control>
+            <!-- Resolution -->
+            <control type="label">
+              <posx>1120</posx>
+              <posy>0</posy>
+              <width>1005</width>
+              <height>120</height>
+              <font>font15</font>
+              <align>right</align>
+              <textcolor>grey2</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.PictureResolution]</label>
+            </control>
+          </itemlayout>
+          <focusedlayout height="120" width="1140" condition="Container.Content(photos)">
+            <include>ListSeparator</include>
+            <include>ListHighlight</include>
+            <!-- Photo Thumbnail -->
+            <control type="image">
+              <posx>15</posx>
+              <posy>8</posy>
+              <width>105</width>
+              <height>105</height>
+              <aspectratio>scale</aspectratio>
+              <texture background="true" fallback="defaultpicture.png">$INFO[ListItem.Art(smallThumb)]</texture>
+              <visible>!ListItem.Type(photoAlbum)</visible>
+            </control>
+            <!-- Folder Thumbnail -->
+            <control type="image">
+              <posx>15</posx>
+              <posy>8</posy>
+              <width>105</width>
+              <height>105</height>
+              <aspectratio>scale</aspectratio>
+              <texture background="true" fallback="defaultfolder.png">$INFO[ListItem.Art(smallThumb)]</texture>
+              <visible>ListItem.Type(photoAlbum)</visible>
+            </control>
+            <!-- Folder Icon -->
+            <control type="image">
+              <posx>85</posx>
+              <posy>13</posy>
+              <width>30</width>
+              <height>30</height>
+              <aspectratio>scale</aspectratio>
+              <texture>icon-photoalbum.png</texture>
+              <visible>ListItem.Type(photoAlbum)</visible>
+            </control>
+            <!-- Title -->
+            <control type="label">
+              <posx>135</posx>
+              <posy>0</posy>
+              <width>1005</width>
+              <height>70</height>
+              <font>font30</font>
+              <textcolor>white</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Label]</label>
+              <animation effect="slide" start="0,0" end="0,25" time="0" condition="IsEmpty(ListItem.Date)">Conditional</animation>
+            </control>
+            <!-- Date -->
+            <control type="label">
+              <posx>135</posx>
+              <posy>55</posy>
+              <width>708</width>
+              <height>60</height>
+              <font>font15</font>
+              <textcolor>white</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <align>left</align>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.Date]</label>
+            </control>
+            <!-- Resolution -->
+            <control type="label">
+              <posx>1120</posx>
+              <posy>0</posy>
+              <width>1005</width>
+              <height>120</height>
+              <font>font15</font>
+              <align>right</align>
+              <textcolor>white</textcolor>
+              <selectedcolor>$VAR[Colour_ListThemeColourVar]</selectedcolor>
+              <aligny>center</aligny>
+              <label>$INFO[ListItem.PictureResolution]</label>
+            </control>
+          </focusedlayout>
         </control>
         <!-- Scrollbar -->
         <include>ListScrollbar</include>
@@ -1542,7 +1688,7 @@
           <width>570</width>
           <height>835</height>
           <aspectratio aligny="bottom" scalediffuse="false">scale</aspectratio>
-          <texture fallback="defaultgenre.png">$INFO[ListItem.Label,genres/movies/570x835/,.png]</texture>
+          <texture>$INFO[ListItem.Label,genres/movies/570x835/,.png]</texture>
           <fadetime>400</fadetime>
           <bordertexture border="20">thumbs/thumb_shadow.png</bordertexture>
           <bordersize>20</bordersize>
@@ -1554,7 +1700,7 @@
           <height>835</height>
           <aspectratio aligny="top">keep</aspectratio>
           <fadetime>400</fadetime>
-          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true" fallback="defaultgenre.png">$INFO[ListItem.Label,genres/movies/570x835/,.png]</texture>
+          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true">$INFO[ListItem.Label,genres/movies/570x835/,.png]</texture>
           <bordersize>20</bordersize>
           <visible>String.IsEqual(Skin.String(Filter.Type),movies) + String.IsEqual(Container.SecondTitle,By Genre)</visible>
         </control>
@@ -1562,7 +1708,7 @@
           <width>570</width>
           <height>835</height>
           <aspectratio aligny="bottom" scalediffuse="false">scale</aspectratio>
-          <texture fallback="defaultgenre.png">$INFO[ListItem.Label,genres/tv/570x835/,.png]</texture>
+          <texture>$INFO[ListItem.Label,genres/tv/570x835/,.png]</texture>
           <fadetime>400</fadetime>
           <bordertexture border="20">thumbs/thumb_shadow.png</bordertexture>
           <bordersize>20</bordersize>
@@ -1574,7 +1720,7 @@
           <height>835</height>
           <aspectratio aligny="top">keep</aspectratio>
           <fadetime>400</fadetime>
-          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true" fallback="defaultgenre.png">$INFO[ListItem.Label,genres/tv/570x835/,.png]</texture>
+          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true">$INFO[ListItem.Label,genres/tv/570x835/,.png]</texture>
           <bordersize>20</bordersize>
           <visible>String.IsEqual(Skin.String(Filter.Type),tv) + String.IsEqual(Container.SecondTitle,By Genre)</visible>
         </control>
@@ -1582,7 +1728,7 @@
           <width>570</width>
           <height>835</height>
           <aspectratio aligny="bottom" scalediffuse="false">scale</aspectratio>
-          <texture fallback="defaultgenre.png">$INFO[ListItem.Label,genres/anime/570x835/,.png]</texture>
+          <texture>$INFO[ListItem.Label,genres/anime/570x835/,.png]</texture>
           <fadetime>400</fadetime>
           <bordertexture border="20">thumbs/thumb_shadow.png</bordertexture>
           <bordersize>20</bordersize>
@@ -1594,7 +1740,7 @@
           <height>835</height>
           <aspectratio aligny="top">keep</aspectratio>
           <fadetime>400</fadetime>
-          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true" fallback="defaultgenre.png">$INFO[ListItem.Label,genres/anime/570x835/,.png]</texture>
+          <texture diffuse="thumbs/thumb_reflect.png" flipy="true" background="true">$INFO[ListItem.Label,genres/anime/570x835/,.png]</texture>
           <bordersize>20</bordersize>
           <visible>String.IsEqual(Skin.String(Filter.Type),anime) + String.IsEqual(Container.SecondTitle,By Genre)</visible>
         </control>
@@ -1788,7 +1934,7 @@
       <control type="group">
         <posx>1296</posx>
         <posy>185</posy>
-        <visible>Container.Content(artists) | Container.Content(albums)</visible>
+        <visible>Container.Content(artists) | Container.Content(albums) | [String.IsEqual(Container.SecondTitle,By Genre) + String.IsEqual(Skin.String(Filter.Type),music)]</visible>
         <control type="image">
           <posy>140</posy>
           <posx>98</posx>
@@ -1806,7 +1952,17 @@
           <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
           <texture background="true">$INFO[ListItem.Art(thumb)]</texture>
           <fadetime>400</fadetime>
-          <visible>![Container.Content(artists) + IsEmpty(ListItem.Art(smallThumb))]</visible>
+          <visible>![Container.Content(artists) + IsEmpty(ListItem.Art(smallThumb))] + !String.IsEqual(Container.SecondTitle,By Genre)</visible>
+        </control>
+        <control type="image">
+          <posy>140</posy>
+          <posx>98</posx>
+          <width>335</width>
+          <height>335</height>
+          <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
+          <texture background="true" fallback="views/list/defaultgenre.png">$INFO[ListItem.Label,genres/music/335x335/,.png]</texture>
+          <fadetime>400</fadetime>
+          <visible>String.IsEqual(Container.SecondTitle,By Genre)</visible>
         </control>
         <control type="image">
           <posy>140</posy>
